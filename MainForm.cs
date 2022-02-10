@@ -307,6 +307,9 @@ namespace Center
                     // If the launch string exists
                     if (NullHelper.Exists(launch))
                     {
+                        // Delete this launch so it isn't stored
+                        gateway.DeleteLaunch(launch.Id);
+
                         // verify this is a url
                         if (launch.Url.StartsWith("https://"))
                         {
