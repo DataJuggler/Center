@@ -1,4 +1,5 @@
-﻿You will need SQL Server or SQL Server Express to use this product.
+﻿You will need SQL Server or SQL Server Express to use this product. This is a browser meant to be used by developers for now.
+ I could change the internal data saving to something else, but I haven't done that yet.
 
 Instructions
 1. In SQL Server Manager Studio, create database named Center
