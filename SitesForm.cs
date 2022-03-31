@@ -80,15 +80,23 @@ namespace Center
             /// </summary>
             private void FavoritesListBox_SelectedIndexChanged(object sender, EventArgs e)
             {
-                // Set the SelectedFavorite
-                SelectedFavorite = Favorites[FavoritesListBox.SelectedIndex];
-
-                // If the SelectedFavorite object exists
-                if (NullHelper.Exists(SelectedFavorite))
+                // verify Favorites collection exists
+                if (NullHelper.Exists(Favorites))
                 {
-                    // Display
-                    UrlControl.Text = SelectedFavorite.Url;
-                    SiteNameControl.Text = SelectedFavorite.Name;
+                    // if the index is in range
+                    if ((FavoritesListBox.SelectedIndex <= 0) && (FavoritesListBox.SelectedIndex < Favorites.Count))
+                    {
+                        // Set the SelectedFavorite
+                        SelectedFavorite = Favorites[FavoritesListBox.SelectedIndex];
+
+                        // If the SelectedFavorite object exists
+                        if (NullHelper.Exists(SelectedFavorite))
+                        {
+                            // Display
+                            UrlControl.Text = SelectedFavorite.Url;
+                            SiteNameControl.Text = SelectedFavorite.Name;
+                        }
+                    }
                 }
 
                 // Enable or disable controls

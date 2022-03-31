@@ -434,6 +434,23 @@ namespace Center
             }
             #endregion
             
+            #region UrlTextBox_TextChanged(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when Url Text Box _ Text Changed
+            /// </summary>
+            private void UrlTextBox_TextChanged(object sender, EventArgs e)
+            {
+                // get the current text
+                string text = UrlTextBox.Text;
+
+                // if the text exists
+                if ((TextHelper.Exists(text)) && (ListHelper.HasOneOrMoreItems(Favorites)))
+                {
+                    // to do: Add control to display lists as you type
+                }
+            }
+            #endregion
+            
         #endregion
 
         #region Methods
