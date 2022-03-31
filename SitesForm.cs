@@ -84,7 +84,7 @@ namespace Center
                 if (NullHelper.Exists(Favorites))
                 {
                     // if the index is in range
-                    if ((FavoritesListBox.SelectedIndex <= 0) && (FavoritesListBox.SelectedIndex < Favorites.Count))
+                    if ((FavoritesListBox.SelectedIndex >= 0) && (FavoritesListBox.SelectedIndex < Favorites.Count))
                     {
                         // Set the SelectedFavorite
                         SelectedFavorite = Favorites[FavoritesListBox.SelectedIndex];
@@ -111,7 +111,7 @@ namespace Center
             private void GoButton_Click(object sender, EventArgs e)
             {
                 // If there is a selected parent and a SelectedFavorite
-                if ((HasParent) && (HasSelectedFavorite))
+                if ((HasParent) && (HasSelectedFavorite) && (TextHelper.Exists(SelectedFavorite.Url)))
                 {
                     // Go to
                     Parent.NavigateTo(SelectedFavorite.Url);

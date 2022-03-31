@@ -480,6 +480,8 @@ namespace Center
                 // Load all favorites
                 Favorites = Gateway.LoadFavorites();
 
+                Exception error = Gateway.GetLastException();
+
                 // Load Blocked Sites
                 BlockedSites = Gateway.LoadBlockedSites();
 
@@ -494,19 +496,23 @@ namespace Center
             /// </summary>
             public void NavigateTo(string url)
             {
-                // if the Browser is ready
-                if (NullHelper.Exists(Browser, Browser.CoreWebView2))
+                // only try and alunch if there is a url
+                if (TextHelper.Exists(url))
                 {
-                    // Display the Url
-                    UrlTextBox.Text = url;
+                    // if the Browser is ready
+                    if (NullHelper.Exists(Browser, Browser.CoreWebView2))
+                    {
+                        // Display the Url
+                        UrlTextBox.Text = url;
 
-                    // Go to
-                    Browser.CoreWebView2.Navigate(url);
-                }
-                else
-                {
-                    // debugging
-                    throw new Exception("Error Launching");
+                        // Go to
+                        Browser.CoreWebView2.Navigate(url);
+                    }
+                    else
+                    {
+                        // debugging
+                        throw new Exception("Error Launching");
+                    }
                 }
             }
             #endregion

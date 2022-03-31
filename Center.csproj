@@ -21,9 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DataJuggler.Net6" Version="6.0.0" />
-    <PackageReference Include="DataJuggler.Win.Controls" Version="6.1.2" />
-    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1072.54" />
+    <PackageReference Include="DataJuggler.Net6" Version="6.0.4" />
+    <PackageReference Include="DataJuggler.Win.Controls" Version="6.1.4" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1150.38" />
   </ItemGroup>
 
   <ItemGroup>
