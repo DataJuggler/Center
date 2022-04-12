@@ -92,6 +92,20 @@ namespace Center
             }
             #endregion
             
+            #region Browser_SourceChanged(object sender, Microsoft.Web.WebView2.Core.CoreWebView2SourceChangedEventArgs e)
+            /// <summary>
+            /// event is fired when Browser _ Source Changed
+            /// </summary>
+            private void Browser_SourceChanged(object sender, Microsoft.Web.WebView2.Core.CoreWebView2SourceChangedEventArgs e)
+            {
+                // Change the Source
+                UrlTextBox.Text = Browser.Source.ToString();
+
+                // Setup the buttons for back forward
+                UIEnable();
+            }
+            #endregion
+            
             #region Button_MouseEnter(object sender, EventArgs e)
             /// <summary>
             /// event is fired when Button _ Mouse Enter
@@ -212,18 +226,32 @@ namespace Center
             /// event is fired when the 'FavoritesButton' is clicked.
             /// </summary>
             private void FavoritesButton_Click(object sender, EventArgs e)
-            {
-                // get the url
-                string url = UrlTextBox.Text;
-                
-                // get the name
-                string name = url.Replace("https://", "").Replace(".com", "").Replace(".net", "").Replace(".org", "").Trim();
-                name = TextHelper.CapitalizeFirstChar(name);
+            {  
+                MouseEventArgs mouseArgs = e as MouseEventArgs;
 
-                SitesForm sitesForm = new SitesForm();
-                sitesForm.Setup(this, Favorites, name, url);
-                sitesForm.Location = new Point(this.Width - sitesForm.Width - 80, 200);
-                sitesForm.ShowDialog();
+                // if right click
+                if (mouseArgs.Button == MouseButtons.Right)
+                {
+                    // to do: Learn how to get page source
+                    Task<string> result = GetPageSource();
+
+                    // Get the htmlText
+                    string htmlText = result.Result;
+                }
+                else
+                {
+                    // get the url
+                    string url = UrlTextBox.Text;
+                
+                    // get the name
+                    string name = url.Replace("https://", "").Replace(".com", "").Replace(".net", "").Replace(".org", "").Trim();
+                    name = TextHelper.CapitalizeFirstChar(name);
+
+                    SitesForm sitesForm = new SitesForm();
+                    sitesForm.Setup(this, Favorites, name, url);
+                    sitesForm.Location = new Point(this.Width - sitesForm.Width - 80, 200);
+                    sitesForm.ShowDialog();
+                }
             }
             #endregion
             
@@ -455,6 +483,21 @@ namespace Center
 
         #region Methods
             
+            #region GetPageSource()
+            /// <summary>
+            /// returns the Page Source
+            /// </summary>
+            public async Task<string> GetPageSource()
+            {
+                // initial value
+                string pageSource = await Browser.CoreWebView2.ExecuteScriptAsync("document.body.outerHTML");
+                var htmldecoded = System.Web.HttpUtility.HtmlDecode(pageSource);
+                
+                // return value
+                return pageSource;
+            }
+            #endregion
+            
             #region Init()
             /// <summary>
             ///  This method performs initializations for this object.
@@ -480,21 +523,23 @@ namespace Center
                 // Load all favorites
                 Favorites = Gateway.LoadFavorites();
 
-                Exception error = Gateway.GetLastException();
+                // Exception error = Gateway.GetLastException();
 
                 // Load Blocked Sites
                 BlockedSites = Gateway.LoadBlockedSites();
 
                 // Setup the FullScreen Chagned Event
                 Browser.CoreWebView2.ContainsFullScreenElementChanged += CoreWebView2_ContainsFullScreenElementChanged;                
-            }
-            #endregion
 
-            #region NavigateTo(string url)
-            /// <summary>
-            /// Navigate To
-            /// </summary>
-            public void NavigateTo(string url)
+                
+            }
+        #endregion
+
+        #region NavigateTo(string url)
+        /// <summary>
+        /// Navigate To
+        /// </summary>
+        public void NavigateTo(string url)
             {
                 // only try and alunch if there is a url
                 if (TextHelper.Exists(url))

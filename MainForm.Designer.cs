@@ -155,6 +155,7 @@
             this.Browser.Size = new System.Drawing.Size(1143, 508);
             this.Browser.TabIndex = 17;
             this.Browser.ZoomFactor = 1D;
+            this.Browser.SourceChanged += new System.EventHandler<Microsoft.Web.WebView2.Core.CoreWebView2SourceChangedEventArgs>(this.Browser_SourceChanged);
             // 
             // RightSplitter
             // 

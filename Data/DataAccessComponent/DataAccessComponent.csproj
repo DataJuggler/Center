@@ -13,8 +13,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DataJuggler.Net6" Version="6.0.0" />
-    <PackageReference Include="DataJuggler.UltimateHelper" Version="6.0.0" />
+    <PackageReference Include="DataJuggler.Net6" Version="6.0.4" />
+    <PackageReference Include="DataJuggler.UltimateHelper" Version="6.0.2" />
   </ItemGroup>
 
   <ItemGroup>
