@@ -42,6 +42,7 @@
             this.StatusLabel = new System.Windows.Forms.Label();
             this.GoButton = new DataJuggler.Win.Controls.Button();
             this.GoButton2 = new DataJuggler.Win.Controls.Button();
+            this.AddCollectionButton = new DataJuggler.Win.Controls.Button();
             this.SuspendLayout();
             // 
             // SearchTextBox
@@ -51,13 +52,14 @@
             this.SearchTextBox.Editable = true;
             this.SearchTextBox.Encrypted = false;
             this.SearchTextBox.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.SearchTextBox.Inititialized = true;
             this.SearchTextBox.LabelBottomMargin = 0;
             this.SearchTextBox.LabelColor = System.Drawing.Color.LemonChiffon;
             this.SearchTextBox.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.SearchTextBox.LabelText = "Search:";
             this.SearchTextBox.LabelTopMargin = 0;
             this.SearchTextBox.LabelWidth = 120;
-            this.SearchTextBox.Location = new System.Drawing.Point(20, 198);
+            this.SearchTextBox.Location = new System.Drawing.Point(20, 182);
             this.SearchTextBox.MultiLine = false;
             this.SearchTextBox.Name = "SearchTextBox";
             this.SearchTextBox.OnTextChangedListener = null;
@@ -76,7 +78,7 @@
             // 
             this.FavoritesListBox.FormattingEnabled = true;
             this.FavoritesListBox.ItemHeight = 18;
-            this.FavoritesListBox.Location = new System.Drawing.Point(140, 236);
+            this.FavoritesListBox.Location = new System.Drawing.Point(140, 220);
             this.FavoritesListBox.Name = "FavoritesListBox";
             this.FavoritesListBox.Size = new System.Drawing.Size(351, 328);
             this.FavoritesListBox.TabIndex = 1;
@@ -89,7 +91,7 @@
             this.AddButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AddButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.AddButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.AddButton.Location = new System.Drawing.Point(140, 571);
+            this.AddButton.Location = new System.Drawing.Point(140, 556);
             this.AddButton.Margin = new System.Windows.Forms.Padding(4);
             this.AddButton.Name = "AddButton";
             this.AddButton.Size = new System.Drawing.Size(112, 40);
@@ -103,7 +105,7 @@
             this.EditButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.EditButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.EditButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.EditButton.Location = new System.Drawing.Point(260, 571);
+            this.EditButton.Location = new System.Drawing.Point(260, 556);
             this.EditButton.Margin = new System.Windows.Forms.Padding(4);
             this.EditButton.Name = "EditButton";
             this.EditButton.Size = new System.Drawing.Size(112, 40);
@@ -117,7 +119,7 @@
             this.DeleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.DeleteButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.DeleteButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.DeleteButton.Location = new System.Drawing.Point(379, 571);
+            this.DeleteButton.Location = new System.Drawing.Point(379, 556);
             this.DeleteButton.Margin = new System.Windows.Forms.Padding(4);
             this.DeleteButton.Name = "DeleteButton";
             this.DeleteButton.Size = new System.Drawing.Size(112, 40);
@@ -132,6 +134,7 @@
             this.UrlControl.Editable = true;
             this.UrlControl.Encrypted = false;
             this.UrlControl.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.UrlControl.Inititialized = true;
             this.UrlControl.LabelBottomMargin = 0;
             this.UrlControl.LabelColor = System.Drawing.Color.LemonChiffon;
             this.UrlControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -160,6 +163,7 @@
             this.SiteNameControl.Editable = true;
             this.SiteNameControl.Encrypted = false;
             this.SiteNameControl.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.SiteNameControl.Inititialized = true;
             this.SiteNameControl.LabelBottomMargin = 0;
             this.SiteNameControl.LabelColor = System.Drawing.Color.LemonChiffon;
             this.SiteNameControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -260,7 +264,7 @@
             this.GoButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.GoButton2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.GoButton2.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.GoButton2.Location = new System.Drawing.Point(20, 236);
+            this.GoButton2.Location = new System.Drawing.Point(20, 220);
             this.GoButton2.Margin = new System.Windows.Forms.Padding(4);
             this.GoButton2.Name = "GoButton2";
             this.GoButton2.Size = new System.Drawing.Size(112, 40);
@@ -268,11 +272,26 @@
             this.GoButton2.Theme = DataJuggler.Win.Controls.Enumerations.ThemeEnum.Dark;
             this.GoButton2.Click += new System.EventHandler(this.GoButton2_Click);
             // 
+            // AddCollectionButton
+            // 
+            this.AddCollectionButton.BackColor = System.Drawing.Color.Transparent;
+            this.AddCollectionButton.ButtonText = "Add Collection";
+            this.AddCollectionButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.AddCollectionButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.AddCollectionButton.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.AddCollectionButton.Location = new System.Drawing.Point(140, 608);
+            this.AddCollectionButton.Margin = new System.Windows.Forms.Padding(4);
+            this.AddCollectionButton.Name = "AddCollectionButton";
+            this.AddCollectionButton.Size = new System.Drawing.Size(232, 40);
+            this.AddCollectionButton.TabIndex = 13;
+            this.AddCollectionButton.Theme = DataJuggler.Win.Controls.Enumerations.ThemeEnum.Dark;
+            // 
             // SitesForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(905, 663);
+            this.Controls.Add(this.AddCollectionButton);
             this.Controls.Add(this.GoButton2);
             this.Controls.Add(this.GoButton);
             this.Controls.Add(this.StatusLabel);
@@ -311,5 +330,6 @@
         private DataJuggler.Win.Controls.LabelCheckBoxControl IsStartPage;
         private DataJuggler.Win.Controls.Button GoButton;
         private DataJuggler.Win.Controls.Button GoButton2;
+        private DataJuggler.Win.Controls.Button AddCollectionButton;
     }
 }

@@ -2,7 +2,7 @@
 
 #region using statements
 
-using DataJuggler.Net6;
+using DataJuggler.Net7;
 using Microsoft.Web.WebView2;
 using System.Collections.Generic;
 using ObjectLibrary.BusinessObjects;
@@ -232,10 +232,8 @@ namespace Center
                 // if right click
                 if (mouseArgs.Button == MouseButtons.Right)
                 {
-                    // to do: Learn how to get page source
-                    Task<string> result = GetPageSource();
-
                     // Get the htmlText
+                    Task<string> result =  GetPageSource();
                     string htmlText = result.Result;
                 }
                 else
@@ -491,10 +489,12 @@ namespace Center
             {
                 // initial value
                 string pageSource = await Browser.CoreWebView2.ExecuteScriptAsync("document.body.outerHTML");
+                
+
                 var htmldecoded = System.Web.HttpUtility.HtmlDecode(pageSource);
                 
                 // return value
-                return pageSource;
+                return htmldecoded;
             }
             #endregion
             

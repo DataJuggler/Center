@@ -6,7 +6,7 @@ Go
 -- =========================================================
 -- Procure Name: BlockedSite_Insert
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   2/10/2022
+-- Create Date:   2/9/2023
 -- Description:    Insert a new BlockedSite
 -- =========================================================
 
@@ -66,7 +66,7 @@ Go
 -- =========================================================
 -- Procure Name: BlockedSite_Update
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   2/10/2022
+-- Create Date:   2/9/2023
 -- Description:    Update an existing BlockedSite
 -- =========================================================
 
@@ -128,7 +128,7 @@ Go
 -- =========================================================
 -- Procure Name: BlockedSite_Find
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   2/10/2022
+-- Create Date:   2/9/2023
 -- Description:    Find an existing BlockedSite
 -- =========================================================
 
@@ -185,7 +185,7 @@ Go
 -- =========================================================
 -- Procure Name: BlockedSite_Delete
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   2/10/2022
+-- Create Date:   2/9/2023
 -- Description:    Delete an existing BlockedSite
 -- =========================================================
 
@@ -239,7 +239,7 @@ Go
 -- =========================================================
 -- Procure Name: BlockedSite_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   2/10/2022
+-- Create Date:   2/9/2023
 -- Description:    Returns all BlockedSite objects
 -- =========================================================
 
@@ -290,7 +290,7 @@ Go
 -- =========================================================
 -- Procure Name: Favorite_Insert
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   2/10/2022
+-- Create Date:   2/9/2023
 -- Description:    Insert a new Favorite
 -- =========================================================
 
@@ -352,7 +352,7 @@ Go
 -- =========================================================
 -- Procure Name: Favorite_Update
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   2/10/2022
+-- Create Date:   2/9/2023
 -- Description:    Update an existing Favorite
 -- =========================================================
 
@@ -418,7 +418,7 @@ Go
 -- =========================================================
 -- Procure Name: Favorite_Find
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   2/10/2022
+-- Create Date:   2/9/2023
 -- Description:    Find an existing Favorite
 -- =========================================================
 
@@ -475,7 +475,7 @@ Go
 -- =========================================================
 -- Procure Name: Favorite_Delete
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   2/10/2022
+-- Create Date:   2/9/2023
 -- Description:    Delete an existing Favorite
 -- =========================================================
 
@@ -529,7 +529,7 @@ Go
 -- =========================================================
 -- Procure Name: Favorite_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   2/10/2022
+-- Create Date:   2/9/2023
 -- Description:    Returns all Favorite objects
 -- =========================================================
 
@@ -580,7 +580,7 @@ Go
 -- =========================================================
 -- Procure Name: Launch_Insert
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   2/10/2022
+-- Create Date:   2/9/2023
 -- Description:    Insert a new Launch
 -- =========================================================
 
@@ -640,7 +640,7 @@ Go
 -- =========================================================
 -- Procure Name: Launch_Update
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   2/10/2022
+-- Create Date:   2/9/2023
 -- Description:    Update an existing Launch
 -- =========================================================
 
@@ -702,7 +702,7 @@ Go
 -- =========================================================
 -- Procure Name: Launch_Find
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   2/10/2022
+-- Create Date:   2/9/2023
 -- Description:    Find an existing Launch
 -- =========================================================
 
@@ -759,7 +759,7 @@ Go
 -- =========================================================
 -- Procure Name: Launch_Delete
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   2/10/2022
+-- Create Date:   2/9/2023
 -- Description:    Delete an existing Launch
 -- =========================================================
 
@@ -813,7 +813,7 @@ Go
 -- =========================================================
 -- Procure Name: Launch_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   2/10/2022
+-- Create Date:   2/9/2023
 -- Description:    Returns all Launch objects
 -- =========================================================
 
@@ -857,6 +857,72 @@ BEGIN
     From [Launch]
 
 END
+
+-- Begin Custom Methods
+
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+Go
+-- =========================================================
+-- Procure Name: Launch_FindByLaunchDate
+-- Author:           Data Juggler - Data Tier.Net Procedure Generator
+-- Create Date:   2/9/2023
+-- Description:    Find an existing Launch for the LaunchDate given.
+-- =========================================================
+
+-- Check if the procedure already exists
+IF EXISTS (select * from syscomments where id = object_id ('Launch_FindByLaunchDate'))
+
+    -- Procedure Does Exist, Drop First
+    BEGIN
+
+        -- Execute Drop
+        Drop Procedure Launch_FindByLaunchDate
+
+        -- Test if procedure was dropped
+        IF OBJECT_ID('dbo.Launch_FindByLaunchDate') IS NOT NULL
+
+            -- Print Line Drop Failed
+            PRINT '<<< Drop Failed On Procedure Launch_FindByLaunchDate >>>'
+
+        Else
+
+            -- Print Line Procedure Dropped
+            PRINT '<<< Drop Suceeded On Procedure Launch_FindByLaunchDate >>>'
+
+    End
+
+GO
+
+Create PROCEDURE Launch_FindByLaunchDate
+
+    -- Create @LaunchDate Paramater
+    @LaunchDate datetime
+
+AS
+BEGIN
+
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+
+    -- Begin Select Statement
+    Select [Id],[LaunchDate],[SiteId],[Url]
+
+    -- From tableName
+    From [Launch]
+
+    -- Find Matching Record
+    Where [LaunchDate] = @LaunchDate
+
+    -- Order by Id in descending order
+    Order By [Id] desc
+
+END
+
+
+-- End Custom Methods
 
 -- Thank you for using DataTier.Net.
 

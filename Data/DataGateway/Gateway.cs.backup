@@ -122,6 +122,43 @@ namespace DataGateway
             }
             #endregion
         
+            #region DeleteLaunch(int id, Launch tempLaunch = null)
+            /// <summary>
+            /// This method is used to delete Launch objects.
+            /// </summary>
+            /// <param name="id">Delete the Launch with this id</param>
+            /// <param name="tempLaunch">Pass in a tempLaunch to perform a custom delete.</param>
+            public bool DeleteLaunch(int id, Launch tempLaunch = null)
+            {
+                // initial value
+                bool deleted = false;
+        
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // if the tempLaunch does not exist
+                    if (tempLaunch == null)
+                    {
+                        // create a temp Launch
+                        tempLaunch = new Launch();
+                    }
+        
+                    // if the id is set
+                    if (id > 0)
+                    {
+                        // set the primary key
+                        tempLaunch.UpdateIdentity(id);
+                    }
+        
+                    // perform the delete
+                    deleted = this.AppController.ControllerManager.LaunchController.Delete(tempLaunch);
+                }
+        
+                // return value
+                return deleted;
+            }
+            #endregion
+        
             #region ExecuteNonQuery(string procedureName, SqlParameter[] sqlParameters)
             /// <summary>
             /// This method Executes a Non Query StoredProcedure
@@ -242,6 +279,69 @@ namespace DataGateway
             }
             #endregion
 
+            #region FindLaunch(int id, Launch tempLaunch = null)
+            /// <summary>
+            /// This method is used to find 'Launch' objects.
+            /// </summary>
+            /// <param name="id">Find the Launch with this id</param>
+            /// <param name="tempLaunch">Pass in a tempLaunch to perform a custom find.</param>
+            public Launch FindLaunch(int id, Launch tempLaunch = null)
+            {
+                // initial value
+                Launch launch = null;
+
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // if the tempLaunch does not exist
+                    if (tempLaunch == null)
+                    {
+                        // create a temp Launch
+                        tempLaunch = new Launch();
+                    }
+
+                    // if the id is set
+                    if (id > 0)
+                    {
+                        // set the primary key
+                        tempLaunch.UpdateIdentity(id);
+                    }
+
+                    // perform the find
+                    launch = this.AppController.ControllerManager.LaunchController.Find(tempLaunch);
+                }
+
+                // return value
+                return launch;
+            }
+            #endregion
+
+            #region FindLaunchByLaunchDate(DateTime launchDate)
+            /// <summary>
+            /// This method is used to find 'Launch' objects for the LaunchDate given.
+            /// </summary>
+            public Launch FindLaunchByLaunchDate(DateTime launchDate)
+            {
+                // initial value
+                Launch launch = null;
+                
+                // Create a temp Launch object
+                Launch tempLaunch = new Launch();
+                
+                // Set the value for FindByLaunchDate to true
+                tempLaunch.FindByLaunchDate = true;
+                
+                // Set the value for LaunchDate
+                tempLaunch.LaunchDate = launchDate;
+                
+                // Perform the find
+                launch = FindLaunch(0, tempLaunch);
+                
+                // return value
+                return launch;
+            }
+            #endregion
+            
             #region GetDataConnector()
             /// <summary>
             /// This method (safely) returns the Data Connector from the
@@ -344,6 +444,27 @@ namespace DataGateway
             }
             #endregion
 
+            #region LoadLaunchs(Launch tempLaunch = null)
+            /// <summary>
+            /// This method loads a collection of 'Launch' objects.
+            /// </summary>
+            public List<Launch> LoadLaunchs(Launch tempLaunch = null)
+            {
+                // initial value
+                List<Launch> launchs = null;
+
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // perform the load
+                    launchs = this.AppController.ControllerManager.LaunchController.FetchAll(tempLaunch);
+                }
+
+                // return value
+                return launchs;
+            }
+            #endregion
+
             #region SaveBlockedSite(ref BlockedSite blockedSite)
             /// <summary>
             /// This method is used to save 'BlockedSite' objects.
@@ -381,6 +502,28 @@ namespace DataGateway
                 {
                     // perform the save
                     saved = this.AppController.ControllerManager.FavoriteController.Save(ref favorite);
+                }
+
+                // return value
+                return saved;
+            }
+            #endregion
+
+            #region SaveLaunch(ref Launch launch)
+            /// <summary>
+            /// This method is used to save 'Launch' objects.
+            /// </summary>
+            /// <param name="launch">The Launch to save.</param>
+            public bool SaveLaunch(ref Launch launch)
+            {
+                // initial value
+                bool saved = false;
+
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // perform the save
+                    saved = this.AppController.ControllerManager.LaunchController.Save(ref launch);
                 }
 
                 // return value
@@ -454,4 +597,3 @@ namespace DataGateway
     #endregion
 
 }
-
